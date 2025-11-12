@@ -1,0 +1,2 @@
+7. Aplicación de Registro y Seguimiento de Reclamos
+Una empresa de servicios públicos necesita un sistema donde los clientes puedan registrar reclamos o solicitudes, hacer seguimiento a su estado y recibir notificaciones sobre su resolución.
