@@ -1,0 +1,86 @@
+spring:
+  application:
+    name: vehiculos-api
+  
+  # Configuración de MongoDB
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/vehiculosdb
+      database: vehiculosdb
+      username: vehiculos_user
+      password: vehiculos_password
+      authentication-database: vehiculosdb
+
+  # Configuración específica para perfil Docker
+  profiles:
+    active: local
+
+---
+# Configuración para perfil local
+spring:
+  config:
+    activate:
+      on-profile: local
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/vehiculosdb
+      database: vehiculosdb
+      username: vehiculos_user
+      password: vehiculos_password
+      authentication-database: vehiculosdb
+
+---
+# Configuración para perfil Docker
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://vehiculos_user:vehiculos_password@mongodb:27017/vehiculosdb?authSource=vehiculosdb}
+      database: vehiculosdb
+
+# Configuración del servidor
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# Configuración de logging
+logging:
+  level:
+    com.vehiculos.api: DEBUG
+    org.springframework.data.mongodb: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# Configuración de Swagger/OpenAPI
+springdoc:
+  api-docs:
+    path: /api/v3/api-docs
+  swagger-ui:
+    path: /api/swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+
+# Configuración de Actuator para monitoreo
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when_authorized
+  info:
+    env:
+      enabled: true
+
+---
+# Variables de entorno específicas para la aplicación
+app:
+  vehicle:
+    validation:
+      placa-pattern: "^[A-Z]{3}[0-9]{3}$"
+      precio-min: 1000.0
+      precio-max: 1000000.0
