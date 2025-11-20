@@ -1,0 +1,805 @@
+{
+  "info": {
+    "name": "Vehículos API - Colección Completa",
+    "description": "Colección completa de pruebas para la API REST de Gestión de Vehículos - Spring Boot + MongoDB",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    },
+    {
+      "key": "vehiculo_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "vehiculo_placa",
+      "value": "XYZ123",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "🏥 Health Check",
+      "item": [
+        {
+          "name": "Verificar estado de la API",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/health",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "health"]
+            },
+            "description": "Verifica que la API esté funcionando correctamente"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📊 Estadísticas",
+      "item": [
+        {
+          "name": "Obtener estadísticas del sistema",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/estadisticas",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "estadisticas"]
+            },
+            "description": "Obtiene métricas generales sobre los vehículos del sistema"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🆕 Operaciones CRUD - Crear",
+      "item": [
+        {
+          "name": "Crear vehículo - Toyota Corolla",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"Toyota\",\n  \"modelo\": \"Corolla\",\n  \"año\": 2024,\n  \"placa\": \"{{vehiculo_placa}}\",\n  \"precio\": 25000.00,\n  \"tipo\": \"sedan\",\n  \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos"]
+            },
+            "description": "Crea un nuevo vehículo en el sistema"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has vehicle data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('id');",
+                  "    pm.expect(jsonData.marca).to.eql('Toyota');",
+                  "    pm.expect(jsonData.placa).to.eql(pm.variables.get('vehiculo_placa'));",
+                  "});",
+                  "",
+                  "pm.test(\"Save vehicle ID for later tests\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('vehiculo_id', jsonData.id);",
+                  "    console.log('Vehicle ID saved:', jsonData.id);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Crear vehículo - Honda Civic",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"Honda\",\n  \"modelo\": \"Civic\",\n  \"año\": 2023,\n  \"placa\": \"HON999\",\n  \"precio\": 22000.00,\n  \"tipo\": \"sedan\",\n  \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos"]
+            },
+            "description": "Crea otro vehículo para tener más datos de prueba"
+          },
+          "response": []
+        },
+        {
+          "name": "Crear vehículo - Ford Explorer (No disponible)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"Ford\",\n  \"modelo\": \"Explorer\",\n  \"año\": 2023,\n  \"placa\": \"FOR888\",\n  \"precio\": 35000.00,\n  \"tipo\": \"SUV\",\n  \"disponible\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos"]
+            },
+            "description": "Crea un vehículo no disponible para pruebas"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📖 Operaciones CRUD - Leer",
+      "item": [
+        {
+          "name": "Listar todos los vehículos (paginado)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos?page=0&size=10",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Obtiene todos los vehículos con paginación"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has pagination structure\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('content');",
+                  "    pm.expect(jsonData).to.have.property('page');",
+                  "    pm.expect(jsonData).to.have.property('totalElements');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Obtener vehículo por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/{{vehiculo_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "{{vehiculo_id}}"]
+            },
+            "description": "Obtiene un vehículo específico por su ID"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Vehicle data is correct\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.id).to.eql(pm.collectionVariables.get('vehiculo_id'));",
+                  "    pm.expect(jsonData.marca).to.eql('Toyota');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Obtener vehículo por placa",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/placa/{{vehiculo_placa}}",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "placa", "{{vehiculo_placa}}"]
+            },
+            "description": "Obtiene un vehículo específico por su placa"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔍 Consultas Avanzadas",
+      "item": [
+        {
+          "name": "Buscar vehículos disponibles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/disponibles?disponible=true",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "disponibles"],
+              "query": [
+                {
+                  "key": "disponible",
+                  "value": "true"
+                }
+              ]
+            },
+            "description": "Obtiene solo los vehículos disponibles"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar vehículos no disponibles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/disponibles?disponible=false",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "disponibles"],
+              "query": [
+                {
+                  "key": "disponible",
+                  "value": "false"
+                }
+              ]
+            },
+            "description": "Obtiene solo los vehículos no disponibles"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar por tipo - sedan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/tipo/sedan",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "tipo", "sedan"]
+            },
+            "description": "Obtiene vehículos por tipo específico"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar por tipo - SUV",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/tipo/SUV",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "tipo", "SUV"]
+            },
+            "description": "Obtiene vehículos SUV"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar por marca - Toyota",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/marca/Toyota",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "marca", "Toyota"]
+            },
+            "description": "Obtiene vehículos de una marca específica"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar por marca - Honda",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/marca/Honda",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "marca", "Honda"]
+            },
+            "description": "Obtiene vehículos Honda"
+          },
+          "response": []
+        },
+        {
+          "name": "Búsqueda avanzada - por 'toyota'",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/buscar?texto=toyota&page=0&size=10",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "buscar"],
+              "query": [
+                {
+                  "key": "texto",
+                  "value": "toyota"
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Búsqueda por texto en marca, modelo o tipo"
+          },
+          "response": []
+        },
+        {
+          "name": "Búsqueda avanzada - por 'sedan'",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/buscar?texto=sedan&page=0&size=10",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "buscar"],
+              "query": [
+                {
+                  "key": "texto",
+                  "value": "sedan"
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Búsqueda por tipo de vehículo"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "✏️ Operaciones CRUD - Actualizar",
+      "item": [
+        {
+          "name": "Actualizar precio del vehículo",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"precio\": 28000.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos/{{vehiculo_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "{{vehiculo_id}}"]
+            },
+            "description": "Actualiza solo el precio del vehículo"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Price was updated\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.precio).to.eql(28000.00);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Marcar vehículo como no disponible",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"disponible\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos/{{vehiculo_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "{{vehiculo_id}}"]
+            },
+            "description": "Cambia la disponibilidad del vehículo"
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar modelo y año",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"modelo\": \"Corolla XEi\",\n  \"año\": 2025\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos/{{vehiculo_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "{{vehiculo_id}}"]
+            },
+            "description": "Actualiza modelo y año del vehículo"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🗑️ Operaciones CRUD - Eliminar",
+      "item": [
+        {
+          "name": "Eliminar vehículo por ID",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/{{vehiculo_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "{{vehiculo_id}}"]
+            },
+            "description": "Elimina el vehículo creado para pruebas"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});",
+                  "",
+                  "// 204 No Content responses don't have body, so skip content-type check",
+                  "pm.test(\"Response time is less than 2000ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "❌ Casos de Error",
+      "item": [
+        {
+          "name": "Crear vehículo con placa duplicada",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"Nissan\",\n  \"modelo\": \"Sentra\",\n  \"año\": 2023,\n  \"placa\": \"DEF456\",\n  \"precio\": 20000.00,\n  \"tipo\": \"sedan\",\n  \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos"]
+            },
+            "description": "Intenta crear un vehículo con placa que ya existe (debe fallar)"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Crear vehículo con placa inválida",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"Nissan\",\n  \"modelo\": \"Sentra\",\n  \"año\": 2023,\n  \"placa\": \"INVALID\",\n  \"precio\": 20000.00,\n  \"tipo\": \"sedan\",\n  \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos"]
+            },
+            "description": "Intenta crear un vehículo con formato de placa inválido (debe fallar)"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Crear vehículo con precio inválido",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"marca\": \"Nissan\",\n  \"modelo\": \"Sentra\",\n  \"año\": 2023,\n  \"placa\": \"NIS999\",\n  \"precio\": 500.00,\n  \"tipo\": \"sedan\",\n  \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos"]
+            },
+            "description": "Intenta crear un vehículo con precio por debajo del mínimo (debe fallar)"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Obtener vehículo con ID inexistente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/507f1f77bcf86cd799439011",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "507f1f77bcf86cd799439011"]
+            },
+            "description": "Intenta obtener un vehículo con ID que no existe (debe fallar)"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Actualizar vehículo inexistente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"precio\": 30000.00\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/vehiculos/507f1f77bcf86cd799439011",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "507f1f77bcf86cd799439011"]
+            },
+            "description": "Intenta actualizar un vehículo que no existe (debe fallar)"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "Eliminar vehículo inexistente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/507f1f77bcf86cd799439011",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "507f1f77bcf86cd799439011"]
+            },
+            "description": "Intenta eliminar un vehículo que no existe (debe fallar)"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔄 Flujo Completo de Pruebas",
+      "item": [
+        {
+          "name": "🏃‍♂️ Ejecutar flujo completo (crear, consultar, actualizar, eliminar)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/vehiculos/health",
+              "host": ["{{base_url}}"],
+              "path": ["vehiculos", "health"]
+            },
+            "description": "Punto de inicio para ejecutar el flujo completo de pruebas. Ejecuta las requests en orden para probar todas las funcionalidades."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Scripts de pre-request globales",
+          "// Se ejecutan antes de cada request",
+          "",
+          "// Configurar timestamp para requests únicos",
+          "pm.globals.set('timestamp', new Date().getTime());"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Tests globales",
+          "// Se ejecutan después de cada request",
+          "",
+          "pm.test(\"Response time is less than 2000ms\", function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+          "});",
+          "",
+          "pm.test(\"Response has proper headers\", function () {",
+          "    pm.response.to.have.header('Content-Type');",
+          "});"
+        ]
+      }
+    }
+  ]
+}

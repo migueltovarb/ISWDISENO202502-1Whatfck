@@ -1,5 +1,5 @@
 # Dockerfile para la aplicación backend de vehículos
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 
 # Configurar variables de entorno
 ENV JAVA_OPTS="-Xms512m -Xmx1024m"

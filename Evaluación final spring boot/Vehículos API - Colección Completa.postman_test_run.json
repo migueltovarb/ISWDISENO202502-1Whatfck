@@ -1,0 +1,1117 @@
+{
+	"id": "9ee18e69-fe10-464b-93c8-0ecfd8cfd7ad",
+	"name": "Vehículos API - Colección Completa",
+	"timestamp": "2025-11-20T03:05:05.326Z",
+	"collection_id": "50079842-7fd044c0-87c8-4849-9f91-a8cd0df2407c",
+	"folder_id": 0,
+	"environment_id": "50079842-88b335bf-0448-4861-b45a-dd1df59e8e6b",
+	"totalPass": 64,
+	"delay": "5",
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-11-20T03:05:01.956Z",
+	"totalFail": 7,
+	"results": [
+		{
+			"id": "606558e6-e834-46d1-a7ab-a3c868c4388c",
+			"name": "Verificar estado de la API",
+			"url": "http://localhost:8080/api/vehiculos/health",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "6ee19d4e-5538-4a23-9e1f-63cdd9cc297f",
+			"name": "Obtener estadísticas del sistema",
+			"url": "http://localhost:8080/api/vehiculos/estadisticas",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "83b5076c-f183-485a-bbe5-b69ff367720f",
+			"name": "Crear vehículo - Toyota Corolla",
+			"url": "http://localhost:8080/api/vehiculos",
+			"time": 9,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 201": false,
+				"Response has vehicle data": false,
+				"Save vehicle ID for later tests": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 201": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response has vehicle data": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Save vehicle ID for later tests": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 201": false,
+					"Response has vehicle data": false,
+					"Save vehicle ID for later tests": true
+				}
+			]
+		},
+		{
+			"id": "881e6885-7ec1-455b-af06-54c309fe1775",
+			"name": "Crear vehículo - Honda Civic",
+			"url": "http://localhost:8080/api/vehiculos",
+			"time": 9,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "171161e9-df2c-48c7-a88a-0f18021b9b9b",
+			"name": "Crear vehículo - Ford Explorer (No disponible)",
+			"url": "http://localhost:8080/api/vehiculos",
+			"time": 10,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "90cca67d-6a34-40b0-a995-dd7bbdbd622c",
+			"name": "Listar todos los vehículos (paginado)",
+			"url": "http://localhost:8080/api/vehiculos?page=0&size=10",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 200": true,
+				"Response has pagination structure": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has pagination structure": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 200": true,
+					"Response has pagination structure": true
+				}
+			]
+		},
+		{
+			"id": "84daacc8-93db-48eb-9b4e-4812ba3c4e21",
+			"name": "Obtener vehículo por ID",
+			"url": "http://localhost:8080/api/vehiculos/",
+			"time": 6,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 200": false,
+				"Vehicle data is correct": false
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Vehicle data is correct": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 200": false,
+					"Vehicle data is correct": false
+				}
+			]
+		},
+		{
+			"id": "5989e984-7c34-4766-94dd-66c89dde851a",
+			"name": "Obtener vehículo por placa",
+			"url": "http://localhost:8080/api/vehiculos/placa/XYZ123",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "f07d9d88-e80f-43a4-8878-f24680ffa96e",
+			"name": "Buscar vehículos disponibles",
+			"url": "http://localhost:8080/api/vehiculos/disponibles?disponible=true",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "1337b22a-a15a-456b-9816-acf6b673ff85",
+			"name": "Buscar vehículos no disponibles",
+			"url": "http://localhost:8080/api/vehiculos/disponibles?disponible=false",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "5e0925d7-15fe-4517-9099-7452dfba0075",
+			"name": "Buscar por tipo - sedan",
+			"url": "http://localhost:8080/api/vehiculos/tipo/sedan",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "e46cd799-81ea-4bab-8c4d-4aa1a844481f",
+			"name": "Buscar por tipo - SUV",
+			"url": "http://localhost:8080/api/vehiculos/tipo/SUV",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "7fb7d2c7-f928-479f-b620-c0247b2aa2d9",
+			"name": "Buscar por marca - Toyota",
+			"url": "http://localhost:8080/api/vehiculos/marca/Toyota",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "cc91e669-24d7-41a7-8536-33d36761e68f",
+			"name": "Buscar por marca - Honda",
+			"url": "http://localhost:8080/api/vehiculos/marca/Honda",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "323fb897-3e46-4990-ae8f-c2e0e059d105",
+			"name": "Búsqueda avanzada - por 'toyota'",
+			"url": "http://localhost:8080/api/vehiculos/buscar?texto=toyota&page=0&size=10",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "cfa1a421-1850-47f0-a836-3e7fea8ddda9",
+			"name": "Búsqueda avanzada - por 'sedan'",
+			"url": "http://localhost:8080/api/vehiculos/buscar?texto=sedan&page=0&size=10",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "3054a27e-21ac-423a-bc4e-2bd86580dde5",
+			"name": "Actualizar precio del vehículo",
+			"url": "http://localhost:8080/api/vehiculos/",
+			"time": 4,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 200": false,
+				"Price was updated": false
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Price was updated": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 200": false,
+					"Price was updated": false
+				}
+			]
+		},
+		{
+			"id": "f8741e7f-ed3b-4c9a-ab1d-a2e6caf947c3",
+			"name": "Marcar vehículo como no disponible",
+			"url": "http://localhost:8080/api/vehiculos/",
+			"time": 8,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "8cd47fee-0c4a-4502-bf22-d1d3e53b0596",
+			"name": "Actualizar modelo y año",
+			"url": "http://localhost:8080/api/vehiculos/",
+			"time": 9,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		},
+		{
+			"id": "129b9d15-2896-4621-9f04-4a006ab3f63d",
+			"name": "Eliminar vehículo por ID",
+			"url": "http://localhost:8080/api/vehiculos/",
+			"time": 7,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 204": false
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 204": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 204": false
+				}
+			]
+		},
+		{
+			"id": "9fc14b1f-e3a7-4994-9c6e-d5187d678eb8",
+			"name": "Crear vehículo con placa duplicada",
+			"url": "http://localhost:8080/api/vehiculos",
+			"time": 12,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "ad3059b2-9d96-4231-9db2-4ac0299293c0",
+			"name": "Crear vehículo con placa inválida",
+			"url": "http://localhost:8080/api/vehiculos",
+			"time": 7,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "766f830e-0391-4ee2-995f-a59c140d7b95",
+			"name": "Crear vehículo con precio inválido",
+			"url": "http://localhost:8080/api/vehiculos",
+			"time": 8,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "b02813a5-6cfa-4622-80f0-1d698f34d19c",
+			"name": "Obtener vehículo con ID inexistente",
+			"url": "http://localhost:8080/api/vehiculos/507f1f77bcf86cd799439011",
+			"time": 9,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "de802ff9-aff5-4bf3-99bf-ed4c2ce0a8c9",
+			"name": "Actualizar vehículo inexistente",
+			"url": "http://localhost:8080/api/vehiculos/507f1f77bcf86cd799439011",
+			"time": 9,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "62428398-670d-46e3-9a4d-9d1a88c66e21",
+			"name": "Eliminar vehículo inexistente",
+			"url": "http://localhost:8080/api/vehiculos/507f1f77bcf86cd799439011",
+			"time": 10,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true,
+				"Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true,
+					"Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "d0713e7a-c99e-4227-892f-10abcda324b9",
+			"name": "🏃‍♂️ Ejecutar flujo completo (crear, consultar, actualizar, eliminar)",
+			"url": "http://localhost:8080/api/vehiculos/health",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Response time is less than 2000ms": true,
+				"Response has proper headers": true
+			},
+			"testPassFailCounts": {
+				"Response time is less than 2000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has proper headers": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Response time is less than 2000ms": true,
+					"Response has proper headers": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 222,
+	"collection": {
+		"requests": [
+			{
+				"id": "606558e6-e834-46d1-a7ab-a3c868c4388c",
+				"method": "GET"
+			},
+			{
+				"id": "6ee19d4e-5538-4a23-9e1f-63cdd9cc297f",
+				"method": "GET"
+			},
+			{
+				"id": "83b5076c-f183-485a-bbe5-b69ff367720f",
+				"method": "POST"
+			},
+			{
+				"id": "881e6885-7ec1-455b-af06-54c309fe1775",
+				"method": "POST"
+			},
+			{
+				"id": "171161e9-df2c-48c7-a88a-0f18021b9b9b",
+				"method": "POST"
+			},
+			{
+				"id": "90cca67d-6a34-40b0-a995-dd7bbdbd622c",
+				"method": "GET"
+			},
+			{
+				"id": "84daacc8-93db-48eb-9b4e-4812ba3c4e21",
+				"method": "GET"
+			},
+			{
+				"id": "5989e984-7c34-4766-94dd-66c89dde851a",
+				"method": "GET"
+			},
+			{
+				"id": "f07d9d88-e80f-43a4-8878-f24680ffa96e",
+				"method": "GET"
+			},
+			{
+				"id": "1337b22a-a15a-456b-9816-acf6b673ff85",
+				"method": "GET"
+			},
+			{
+				"id": "5e0925d7-15fe-4517-9099-7452dfba0075",
+				"method": "GET"
+			},
+			{
+				"id": "e46cd799-81ea-4bab-8c4d-4aa1a844481f",
+				"method": "GET"
+			},
+			{
+				"id": "7fb7d2c7-f928-479f-b620-c0247b2aa2d9",
+				"method": "GET"
+			},
+			{
+				"id": "cc91e669-24d7-41a7-8536-33d36761e68f",
+				"method": "GET"
+			},
+			{
+				"id": "323fb897-3e46-4990-ae8f-c2e0e059d105",
+				"method": "GET"
+			},
+			{
+				"id": "cfa1a421-1850-47f0-a836-3e7fea8ddda9",
+				"method": "GET"
+			},
+			{
+				"id": "3054a27e-21ac-423a-bc4e-2bd86580dde5",
+				"method": "PUT"
+			},
+			{
+				"id": "f8741e7f-ed3b-4c9a-ab1d-a2e6caf947c3",
+				"method": "PUT"
+			},
+			{
+				"id": "8cd47fee-0c4a-4502-bf22-d1d3e53b0596",
+				"method": "PUT"
+			},
+			{
+				"id": "129b9d15-2896-4621-9f04-4a006ab3f63d",
+				"method": "DELETE"
+			},
+			{
+				"id": "9fc14b1f-e3a7-4994-9c6e-d5187d678eb8",
+				"method": "POST"
+			},
+			{
+				"id": "ad3059b2-9d96-4231-9db2-4ac0299293c0",
+				"method": "POST"
+			},
+			{
+				"id": "766f830e-0391-4ee2-995f-a59c140d7b95",
+				"method": "POST"
+			},
+			{
+				"id": "b02813a5-6cfa-4622-80f0-1d698f34d19c",
+				"method": "GET"
+			},
+			{
+				"id": "de802ff9-aff5-4bf3-99bf-ed4c2ce0a8c9",
+				"method": "PUT"
+			},
+			{
+				"id": "62428398-670d-46e3-9a4d-9d1a88c66e21",
+				"method": "DELETE"
+			},
+			{
+				"id": "d0713e7a-c99e-4227-892f-10abcda324b9",
+				"method": "GET"
+			}
+		]
+	}
+}
