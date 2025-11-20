@@ -262,15 +262,15 @@ Para problemas con las pruebas:
 
 ## 🎯 Checklist de Pruebas
 
-- [ ] **Health Check** funciona
-- [ ] **Crear vehículo** exitoso
-- [ ] **Listar vehículos** con paginación
-- [ ] **Consultas avanzadas** funcionan
-- [ ] **Actualizar vehículo** exitoso
-- [ ] **Eliminar vehículo** exitoso
-- [ ] **Casos de error** manejados correctamente
-- [ ] **Estadísticas** actualizadas
-- [ ] **Tests automáticos** pasan
-- [ ] **Tiempos de respuesta** aceptables
+- [x] **Health Check** funciona
+- [x] **Crear vehículo** exitoso
+- [x] **Listar vehículos** con paginación
+- [x] **Consultas avanzadas** funcionan
+- [x] **Actualizar vehículo** exitoso
+- [x] **Eliminar vehículo** exitoso
+- [x] **Casos de error** manejados correctamente
+- [x] **Estadísticas** actualizadas
+- [x] **Tests automáticos** pasan
+- [x] **Tiempos de respuesta** aceptables
 
 **¡Todas las pruebas deben pasar para considerar la API completamente funcional!** ✅

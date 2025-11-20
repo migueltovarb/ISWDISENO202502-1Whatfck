@@ -369,9 +369,10 @@ curl -X GET http://localhost:8080/api/vehiculos/estadisticas
 
 Se incluye una **colección completa de Postman** con **70 tests automatizados** que validan el 100% de la funcionalidad:
 
-- 📁 **`Vehiculos API - Colección Completa.postman_collection.json`** - Colección principal
-- 📁 **`Vehiculos API - Variables.postman_environment.json`** - Variables de entorno
-- 📁 **`POSTMAN_TESTS_README.md`** - Guía detallada de uso
+- 📁 **[Carpeta Postman](Postman/)** - Directorio dedicado con todos los archivos de testing
+- 📄 **[Vehiculos API - Colección Completa.postman_collection.json](Postman/Vehiculos%20API%20-%20Colección%20Completa.postman_collection.json)** - Colección principal
+- 📄 **[Vehiculos API - Variables.postman_environment.json](Postman/Vehiculos%20API%20-%20Variables.postman_environment.json)** - Variables de entorno
+- 📖 **[Guía Completa de Testing](Postman/README.md)** - Documentación detallada de uso
 
 #### Resultados de Testing: **100% Éxito** 🏆
 
@@ -769,13 +770,15 @@ Este proyecto representa una **implementación completa y profesional** de una A
 - `README.md` - Documentación completa del proyecto
 - `docker-compose.yml` - Orquestación de servicios Docker
 - `pom.xml` - Dependencias y configuración Maven
-- `Vehiculos API - Colección Completa.postman_collection.json` - Tests completos
-- `POSTMAN_TESTS_README.md` - Guía de testing
+- **[Postman/](Postman/)** - Carpeta completa con tests y documentación
+  - `Vehiculos API - Colección Completa.postman_collection.json` - Tests completos
+  - `Vehiculos API - Variables.postman_environment.json` - Variables de entorno
+  - `README.md` - Guía detallada de testing
 
 ### 🔗 **Enlaces Rápidos**
 - 🏠 **Repositorio**: [GitHub](https://github.com/migueltovarb/ISWDISENO202502-1Whatfck)
 - 📖 **Documentación**: [README](README.md)
-- 🧪 **Tests**: [Postman Collection](Vehiculos API - Colección Completa.postman_collection.json)
+- 🧪 **[Tests Postman](Postman/)**: [Colección Completa](Postman/Vehiculos%20API%20-%20Colección%20Completa.postman_collection.json) | [Guía](Postman/README.md)
 - 🐳 **Docker**: [Docker Compose](docker-compose.yml)
 
 ---
