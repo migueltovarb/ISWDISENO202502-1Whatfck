@@ -12,7 +12,7 @@
 ---
 
 ### 🎥 Video exposición
-**[ Ver en YouTube](https://youtube.com/watch?v=)**
+**[ Ver en YouTube](https://youtu.be/4PsALtchONU)**
 
 ---
 
