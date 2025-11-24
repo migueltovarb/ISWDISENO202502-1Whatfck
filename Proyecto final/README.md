@@ -1,253 +1,202 @@
-# Sistema de Reclamos - Aplicación de Consola
+# 🎯 Sistema de Reclamos - Gestión de Tickets de Servicios Públicos
 
-Una aplicación de consola Java para la gestión de reclamos de servicios públicos, con persistencia en MongoDB.
+<div align="center">
 
-## 🚀 Características
+![Java](https://img.shields.io/badge/Java-17+-orange?style=for-the-badge&logo=java)
+![MongoDB](https://img.shields.io/badge/MongoDB-4.4+-green?style=for-the-badge&logo=mongodb)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=for-the-badge&logo=docker)
+![Maven](https://img.shields.io/badge/Maven-3.6+-purple?style=for-the-badge&logo=apache-maven)
 
-- ✅ **Interfaz de Consola Mejorada**: Colores ANSI, validaciones robustas, navegación intuitiva
-- ✅ **Persistencia en MongoDB**: Base de datos NoSQL con Docker
-- ✅ **Gestión de Usuarios**: Autenticación y roles (Cliente/Soporte)
-- ✅ **Sistema de Reclamos**: Crear, gestionar y responder reclamos
-- ✅ **Estados de Reclamos**: ABIERTO → PENDIENTE → EN_PROCESO → RESUELTO → CERRADO
-- ✅ **Notificaciones**: Automáticas para cambios de estado
-- ✅ **Cierre Automático**: Reclamos sin respuesta en 3 días
+[![Repository](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/migueltovarb/ISWDISENO202502-1Whatfck)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+
+---
+
+## 🎥 Demo del Proyecto
+> **[📺 Ver Exposición en YouTube](https://youtube.com/watch?v=)** *(Próximamente)*
+
+---
+
+### 📋 Descripción
+Aplicación de consola Java para la gestión integral de reclamos de servicios públicos. Implementa arquitectura MVC con persistencia en MongoDB, autenticación de usuarios y sistema completo de notificaciones.
+
+</div>
+
+## ✨ Características Principales
+
+<table>
+<tr>
+<td align="center">
+<img src="https://img.shields.io/badge/🎨-UI_Consola-blue?style=flat-square" alt="UI Consola"/>
+<br><b>Interfaz Mejorada</b>
+<br>• Colores ANSI vibrantes
+<br>• Validaciones robustas
+<br>• Navegación intuitiva
+</td>
+<td align="center">
+<img src="https://img.shields.io/badge/👥-Usuarios-green?style=flat-square" alt="Usuarios"/>
+<br><b>Gestión de Usuarios</b>
+<br>• Autenticación segura
+<br>• Roles Cliente/Soporte
+<br>• Registro automático
+</td>
+<td align="center">
+<img src="https://img.shields.io/badge/📋-Reclamos-orange?style=flat-square" alt="Reclamos"/>
+<br><b>Sistema de Reclamos</b>
+<br>• Estados dinámicos
+<br>• Respuestas en hilo
+<br>• Cierre automático
+</td>
+</tr>
+</table>
+
+### 🔄 Flujo de Estados
+```
+🔵 ABIERTO → 🟡 PENDIENTE → 🟠 EN_PROCESO → 🟢 RESUELTO → 🔴 CERRADO
+```
+
+## 🚀 Inicio Rápido
+
+### 📋 Prerrequisitos
+- **Java 17+** • **Maven 3.6+** • **Docker & Docker Compose**
+
+### ⚡ Instalación en 3 pasos
+
+```bash
+# 1. Clonar repositorio
+git clone https://github.com/migueltovarb/ISWDISENO202502-1Whatfck.git
+cd ISWDISENO202502-1Whatfck/Proyecto\ final
+
+# 2. Iniciar base de datos
+docker-compose up -d
+
+# 3. Ejecutar aplicación
+cd SistemaReclamos && mvn exec:java -Dexec.mainClass="com.sistema.SistemaReclamos"
+```
+
+## 👥 Usuarios del Sistema
+
+### 🔧 Soporte (Predefinidos)
+| Usuario | Email | Contraseña |
+|---------|-------|------------|
+| Carlos López | `carlos@email.com` | `password` |
+| Ana Rodríguez | `ana@email.com` | `password` |
+
+### 👤 Clientes (Datos de Prueba)
+| Usuario | Email | Contraseña |
+|---------|-------|------------|
+| Juan Pérez | `juan@email.com` | `password` |
+| María García | `maria@email.com` | `password` |
+| Pedro Martínez | `pedro@email.com` | `password` |
+
+> 💡 **Nota**: Nuevos registros son automáticamente asignados como **CLIENTES**
+
+## 🎮 Funcionalidades
+
+### 👤 Cliente
+- ✅ **Ver mis reclamos** - Lista personalizada
+- ✅ **Crear reclamo** - Nuevo ticket con validaciones
+- ✅ **Ver detalles** - Historial completo con respuestas
+- ✅ **Editar reclamo** - Modificar datos (estados permitidos)
+- ✅ **Cerrar satisfactoriamente** - Confirmación de resolución
+- ✅ **Ver notificaciones** - Alertas del sistema
+
+### 🔧 Soporte
+- ✅ **Ver todos los reclamos** - Vista completa del sistema
+- ✅ **Gestionar pendientes** - Atención prioritaria
+- ✅ **Responder reclamos** - Comunicación bidireccional
+- ✅ **Cambiar estados** - Control del flujo de trabajo
+- ✅ **Buscar reclamos** - Filtros avanzados
+- ✅ **Ver notificaciones** - Seguimiento de actividades
 
 ## 🏗️ Arquitectura
 
 ```
 SistemaReclamos/
-├── src/main/java/com/sistema/
-│   ├── SistemaReclamos.java          # Clase principal
-│   ├── MongoDBConnection.java        # Conexión a MongoDB
-│   ├── ConsoleUtils.java             # Utilidades de consola
-│   ├── controllers/
-│   │   ├── UsuarioController.java    # Controlador de usuarios
-│   │   └── ReclamoController.java    # Controlador de reclamos
-│   ├── services/
-│   │   ├── UserService.java          # Servicio de usuarios
-│   │   └── ReclamoService.java       # Servicio de reclamos
-│   ├── model/
-│   │   ├── Usuario.java              # Modelo de usuario
-│   │   ├── Reclamo.java              # Modelo de reclamo
-│   │   ├── Respuesta.java            # Modelo de respuesta
-│   │   └── Notificacion.java         # Modelo de notificación
-│   └── enums/
-│       ├── Rol.java                  # Enum de roles
-│       ├── EstadoReclamo.java        # Enum de estados
-│       └── TipoReclamo.java          # Enum de tipos
-└── SistemaReclamos-database/         # Configuración Docker MongoDB
-    ├── Dockerfile                    # Imagen MongoDB
-    └── init-mongo.js                # Datos iniciales
+├── 🎯 SistemaReclamos.java          # Punto de entrada
+├── 🔌 MongoDBConnection.java        # Conexión BD
+├── 🎨 ConsoleUtils.java             # Utilidades UI
+├── 🎮 controllers/                  # Controladores MVC
+│   ├── UsuarioController.java       # Gestión usuarios
+│   └── ReclamoController.java       # Gestión reclamos
+├── 🔧 services/                     # Lógica de negocio
+│   ├── UserService.java            # Servicio usuarios
+│   ├── ReclamoService.java         # Servicio reclamos
+│   └── NotificacionService.java    # Servicio notificaciones
+├── 📦 model/                        # Modelos de datos
+│   ├── Usuario.java                 # Entidad usuario
+│   ├── Reclamo.java                 # Entidad reclamo
+│   ├── Respuesta.java               # Entidad respuesta
+│   └── Notificacion.java            # Entidad notificación
+└── 🏷️ enums/                        # Enumeraciones
+    ├── Rol.java                     # Roles del sistema
+    ├── EstadoReclamo.java           # Estados de reclamo
+    └── TipoReclamo.java             # Tipos de servicio
 ```
 
-## 📋 Prerrequisitos
+## 🐳 Docker & Base de Datos
 
-- **Java 17** o superior
-- **Maven 3.6+**
-- **Docker** y **Docker Compose**
-- **Git** (opcional)
+### 📊 Configuración MongoDB
+```yaml
+Host: localhost:27018
+Database: reclamosdb
+Usuario: reclamos_user
+Contraseña: reclamos_password
+```
 
-## 🛠️ Instalación y Configuración
-
-### 1. Clonar el repositorio
+### 🛠️ Comandos Útiles
 ```bash
-git clone <url-del-repositorio>
-cd ISWDISENO202502-1Whatfck/Proyecto final
+# Gestionar servicios
+docker-compose up -d          # Iniciar
+docker-compose logs -f        # Ver logs
+docker-compose down           # Detener
+
+# Desarrollo
+mvn clean compile             # Compilar
+mvn exec:java -Dexec.mainClass="com.sistema.SistemaReclamos"  # Ejecutar
 ```
 
-### 2. Iniciar la Base de Datos MongoDB
-```bash
-# Iniciar MongoDB con Docker Compose
-docker-compose up -d
+## 📈 Estados de Reclamos
 
-# Verificar que MongoDB esté ejecutándose
-docker ps
-```
+| Estado | Icono | Descripción |
+|--------|-------|-------------|
+| **ABIERTO** | 🔵 | Reclamo recién creado |
+| **PENDIENTE** | 🟡 | Esperando respuesta del cliente |
+| **EN_PROCESO** | 🟠 | Siendo atendido por soporte |
+| **RESUELTO** | 🟢 | Solución implementada |
+| **CERRADO** | 🔴 | Reclamo finalizado |
 
-### 3. Compilar el Proyecto
-```bash
-cd SistemaReclamos
+## 🎯 Características Técnicas
 
-# Descargar dependencias y compilar
-mvn clean compile
-```
-
-### 4. Ejecutar la Aplicación
-```bash
-# Opción 1: Ejecutar automáticamente (recomendado)
-./start.bat  # En Windows
-
-# Opción 2: Ejecutar con Maven
-cd SistemaReclamos
-mvn exec:java -Dexec.mainClass="com.sistema.SistemaReclamos"
-
-# Opción 3: Ejecutar JAR con dependencias
-java -jar target/sistema-reclamos-1.0.0.jar
-```
-
-## 👥 Usuarios del Sistema
-
-### **Usuarios de Soporte (Predefinidos)**
-Estos usuarios ya están configurados en la base de datos y no pueden ser registrados:
-
-| Email | Nombre | Rol | Contraseña |
-|-------|--------|-----|------------|
-| `carlos@email.com` | Carlos López | SOPORTE | `password` |
-| `ana@email.com` | Ana Rodríguez | SOPORTE | `password` |
-
-### **Usuarios Clientes (Datos de Prueba):**
-Usuarios ya registrados en el sistema:
-
-| Email | Nombre | Rol | Contraseña |
-|-------|--------|-----|------------|
-| `juan@email.com` | Juan Pérez | CLIENTE | `password` |
-| `maria@email.com` | María García | CLIENTE | `password` |
-| `pedro@email.com` | Pedro Martínez | CLIENTE | `password` |
-
-### **Registro de Nuevos Clientes:**
-Los usuarios que se registren serán automáticamente asignados como **CLIENTES** con contraseña `password`.
-
-**Nota**: En un sistema real, las contraseñas estarían hasheadas y encriptadas.
-
-## 🎮 Uso de la Aplicación
-
-### Menú Principal
-```
-=== SISTEMA DE RECLAMOS ===
-1. Iniciar Sesión
-2. Registrarse
-3. Salir
-```
-
-### Funcionalidades por Rol
-
-#### 👤 Cliente
-- ✅ Ver mis reclamos
-- ✅ Crear nuevo reclamo
-- ✅ Ver detalle de reclamo
-- ✅ Cerrar sesión
-
-#### 🔧 Soporte
-- ✅ Ver todos los reclamos
-- ✅ Ver reclamos pendientes
-- ✅ Responder a reclamo
-- ✅ Cambiar estado de reclamo
-- ✅ Cerrar sesión
-
-## 📊 Estados de Reclamos
-
-| Estado | Descripción |
-|--------|-------------|
-| 🔵 ABIERTO | Reclamo recién creado |
-| 🟡 PENDIENTE | Tiene respuesta de soporte |
-| 🟠 EN_PROCESO | Está siendo atendido |
-| 🟢 RESUELTO | Solución implementada |
-| 🔴 CERRADO | Reclamo finalizado |
-
-## 🗄️ Base de Datos
-
-### Conexión
-- **Host**: `localhost`
-- **Puerto**: `27018`
-- **Base de datos**: `reclamosdb`
-- **Usuario**: `reclamos_user`
-- **Contraseña**: `reclamos_password`
-
-### Colecciones
-- `usuarios` - Información de usuarios
-- `reclamos` - Reclamos registrados
-- `respuestas` - Respuestas a reclamos
-- `notificaciones` - Notificaciones del sistema
-
-## 🐳 Comandos Docker
-
-```bash
-# Iniciar servicios
-docker-compose up -d
-
-# Ver logs
-docker-compose logs -f
-
-# Detener servicios
-docker-compose down
-
-# Reiniciar con limpieza
-docker-compose down
-docker volume rm sistema_reclamos_mongodb_reclamos_data
-docker-compose up -d
-```
-
-## 🔧 Desarrollo
-
-### Compilación y Empaquetado
-```bash
-# Compilar el proyecto
-mvn clean compile
-
-# Crear JAR con todas las dependencias incluidas
-mvn clean package
-```
-
-### Ejecución
-```bash
-# Ejecutar con Maven (modo desarrollo)
-cd SistemaReclamos
-mvn exec:java -Dexec.mainClass="com.sistema.SistemaReclamos"
-
-# Ejecutar JAR independiente (producción)
-cd SistemaReclamos
-java -jar target/sistema-reclamos-1.0.0.jar
-```
-
-### Dependencias principales
-- **MongoDB Driver**: `org.mongodb:mongodb-driver-sync:4.11.1`
-- **Jackson**: `com.fasterxml.jackson.core:jackson-databind:2.15.2`
-- **SLF4J**: `org.slf4j:slf4j-simple:2.0.9`
-- **Maven Shade Plugin**: Para empaquetado con dependencias
-
-## 📝 Scripts Disponibles
-
-- `compile.bat` - Compilación con batch (Windows)
-- `docker-compose.yml` - Orquestación de servicios
-
-## 🚨 Solución de Problemas
-
-### Error de conexión a MongoDB
-```bash
-# Verificar que Docker esté ejecutándose
-docker ps
-
-# Verificar logs de MongoDB
-docker-compose logs mongodb-reclamos
-
-# Reiniciar servicios
-docker-compose restart
-```
-
-### Error de compilación
-```bash
-# Limpiar y recompilar
-mvn clean compile
-
-# Forzar descarga de dependencias
-mvn dependency:resolve
-```
+- ✅ **Persistencia completa** en MongoDB
+- ✅ **Autenticación robusta** con verificación de credenciales
+- ✅ **Validaciones de entrada** con mensajes de error claros
+- ✅ **Navegación intuitiva** con breadcrumbs
+- ✅ **Sistema de notificaciones** automático
+- ✅ **Cierre automático** de reclamos inactivos
+- ✅ **Interfaz coloreada** con ANSI escape codes
+- ✅ **Manejo de errores** comprehensivo
 
 ## 🤝 Contribución
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+1. 🍴 **Fork** el proyecto
+2. 🌿 **Crea** una rama (`git checkout -b feature/AmazingFeature`)
+3. 💾 **Commit** cambios (`git commit -m 'Add AmazingFeature'`)
+4. 📤 **Push** rama (`git push origin feature/AmazingFeature`)
+5. 🔄 **Pull Request**
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 👨‍💻 Autor
-
-**Sistema de Reclamos** - Proyecto académico de Diseño de Software
+**Proyecto académico - Diseño de Software** 🎓
 
 ---
+
+<div align="center">
+
 **¡Gracias por usar Sistema de Reclamos!** 🎉
+
+*Construido con ❤️ para la gestión eficiente de servicios públicos*
+
+</div>
