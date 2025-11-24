@@ -8,12 +8,11 @@
 ![Maven](https://img.shields.io/badge/Maven-3.6+-purple?style=for-the-badge&logo=apache-maven)
 
 [![Repository](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/migueltovarb/ISWDISENO202502-1Whatfck)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
 ---
 
-## 🎥 Demo del Proyecto
-> **[📺 Ver Exposición en YouTube](https://youtube.com/watch?v=)** *(Próximamente)*
+### 🎥 Video exposición
+**[ Ver en YouTube](https://youtube.com/watch?v=)**
 
 ---
 
@@ -23,7 +22,7 @@ Aplicación de consola Java para la gestión integral de reclamos de servicios p
 </div>
 
 ## ✨ Características Principales
-
+<div align="center">
 <table>
 <tr>
 <td align="center">
@@ -49,6 +48,7 @@ Aplicación de consola Java para la gestión integral de reclamos de servicios p
 </td>
 </tr>
 </table>
+</div>
 
 ### 🔄 Flujo de Estados
 ```
@@ -177,26 +177,14 @@ mvn exec:java -Dexec.mainClass="com.sistema.SistemaReclamos"  # Ejecutar
 - ✅ **Interfaz coloreada** con ANSI escape codes
 - ✅ **Manejo de errores** comprehensivo
 
-## 🤝 Contribución
-
-1. 🍴 **Fork** el proyecto
-2. 🌿 **Crea** una rama (`git checkout -b feature/AmazingFeature`)
-3. 💾 **Commit** cambios (`git commit -m 'Add AmazingFeature'`)
-4. 📤 **Push** rama (`git push origin feature/AmazingFeature`)
-5. 🔄 **Pull Request**
-
-## 📄 Licencia
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-**Proyecto académico - Diseño de Software** 🎓
-
 ---
 
 <div align="center">
+    
+**Proyecto académico - Diseño de Software** 🎓
+    
+**¡Gracias!**
 
-**¡Gracias por usar Sistema de Reclamos!** 🎉
-
-*Construido con ❤️ para la gestión eficiente de servicios públicos*
+*❤️*
 
 </div>
