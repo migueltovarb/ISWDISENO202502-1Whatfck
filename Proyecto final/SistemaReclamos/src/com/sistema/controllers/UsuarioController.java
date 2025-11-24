@@ -43,8 +43,16 @@ public class UsuarioController {
     private Usuario login() {
         ConsoleUtils.printHeader("Iniciar Sesión");
         String email = leerEmail("Email: ");
+        if (email == null) {
+            return iniciarSesion(); // Volver al menú principal
+        }
+
         System.out.print("Contraseña: ");
-        String password = scanner.nextLine();
+        String password = scanner.nextLine().trim();
+        if (password.isEmpty()) {
+            ConsoleUtils.printInfo("Operación cancelada.");
+            return iniciarSesion(); // Volver al menú principal
+        }
 
         Usuario usuario = userService.autenticar(email, password);
         if (usuario != null) {
@@ -59,21 +67,22 @@ public class UsuarioController {
     private Usuario registro() {
         ConsoleUtils.printHeader("Registro de Usuario");
         String nombre = leerNombre("Nombre completo: ");
+        if (nombre == null) {
+            return iniciarSesion(); // Volver al menú principal
+        }
+
         String email = leerEmail("Email: ");
+        if (email == null) {
+            return iniciarSesion(); // Volver al menú principal
+        }
 
-        System.out.println("Tipo de usuario:");
-        System.out.println("1. Cliente");
-        System.out.println("2. Soporte");
-        System.out.print("Seleccione: ");
-
-        int tipoUsuario = leerOpcionNumerica(1, 2);
-        scanner.nextLine();
-
-        Rol rol = (tipoUsuario == 1) ? Rol.CLIENTE : Rol.SOPORTE;
+        // Todos los usuarios registrados son automáticamente CLIENTES
+        // El soporte ya está predefinido en la base de datos
+        Rol rol = Rol.CLIENTE;
 
         try {
             Usuario usuario = userService.registrarUsuario(nombre, email, rol);
-            ConsoleUtils.printSuccess("Usuario registrado exitosamente!");
+            ConsoleUtils.printSuccess("Usuario registrado exitosamente como Cliente!");
             ConsoleUtils.printInfo("Ahora puede iniciar sesión con sus credenciales.");
             return iniciarSesion();
         } catch (IllegalArgumentException e) {
@@ -88,9 +97,10 @@ public class UsuarioController {
             System.out.print(prompt);
             String nombre = scanner.nextLine().trim();
             if (nombre.isEmpty()) {
-                ConsoleUtils.printError("El nombre no puede estar vacío. Intente nuevamente.");
+                ConsoleUtils.printInfo("Operación cancelada.");
+                return null; // Cancelar operación
             } else if (nombre.length() < 2) {
-                ConsoleUtils.printError("El nombre debe tener al menos 2 caracteres. Intente nuevamente.");
+                ConsoleUtils.printError("El nombre debe tener al menos 2 caracteres. Intente nuevamente o presione Enter para cancelar.");
             } else {
                 return nombre;
             }
@@ -102,9 +112,10 @@ public class UsuarioController {
             System.out.print(prompt);
             String email = scanner.nextLine().trim();
             if (email.isEmpty()) {
-                ConsoleUtils.printError("El email no puede estar vacío. Intente nuevamente.");
+                ConsoleUtils.printInfo("Operación cancelada.");
+                return null; // Cancelar operación
             } else if (!EMAIL_PATTERN.matcher(email).matches()) {
-                ConsoleUtils.printError("Formato de email inválido. Intente nuevamente.");
+                ConsoleUtils.printError("Formato de email inválido. Intente nuevamente o presione Enter para cancelar.");
             } else {
                 return email;
             }

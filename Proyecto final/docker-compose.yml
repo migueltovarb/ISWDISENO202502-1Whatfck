@@ -1,25 +1,33 @@
-version: '3.8'
-
 services:
-  mongo:
-    image: mongo:7.0
-    container_name: sistema-reclamos-mongo
+  # Base de datos MongoDB para Sistema de Reclamos
+  mongodb-reclamos:
+    build:
+      context: ./SistemaReclamos-database
+      dockerfile: Dockerfile
+    container_name: reclamos-mongodb
     restart: unless-stopped
-    ports:
-      - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password123
-      MONGO_INITDB_DATABASE: sistema_reclamos
+      MONGO_INITDB_DATABASE: reclamosdb
+    ports:
+      - "27018:27017"  # Puerto diferente al de vehículos (27017)
     volumes:
-      - mongo_data:/data/db
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - mongodb_reclamos_data:/data/db
+      - ./SistemaReclamos-database/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     networks:
-      - sistema-reclamos-network
+      - reclamos-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
 
 volumes:
-  mongo_data:
+  mongodb_reclamos_data:
+    driver: local
 
 networks:
-  sistema-reclamos-network:
+  reclamos-network:
     driver: bridge

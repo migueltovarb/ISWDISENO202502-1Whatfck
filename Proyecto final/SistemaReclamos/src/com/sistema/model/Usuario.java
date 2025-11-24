@@ -7,6 +7,7 @@ public class Usuario {
     private int id;
     private String nombre;
     private String email;
+    private String password;
     private Rol rol;
     private Date fechaRegistro;
 
@@ -14,12 +15,18 @@ public class Usuario {
     public Usuario() {}
 
     // Constructor con parámetros
-    public Usuario(int id, String nombre, String email, Rol rol) {
+    public Usuario(int id, String nombre, String email, String password, Rol rol) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
+        this.password = password;
         this.rol = rol;
         this.fechaRegistro = new Date();
+    }
+
+    // Constructor sin contraseña (para compatibilidad)
+    public Usuario(int id, String nombre, String email, Rol rol) {
+        this(id, nombre, email, null, rol);
     }
 
     // Getters y Setters
@@ -45,6 +52,14 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Rol getRol() {
